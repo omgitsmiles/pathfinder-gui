@@ -37,7 +37,7 @@ export default function SignInSide() {
       email: data.get('email'),
       password: data.get('password'),
     });
-    setLoading(loading => true)
+    setLoading(loading => !loading)
     console.log(loading)
   };
 
@@ -94,7 +94,7 @@ export default function SignInSide() {
               >
                 {loading ? "Downloading..." : "Download"}
               </Button>
-              <div sx={{ alignItems: "center"}}>{loading ? <RingLoader color="#2196f3"/> : null}</div>
+              <div sx={{ marginLeft: "auto"}}>{loading ? <RingLoader color="#2196f3" loading={loading}/> : null}</div>
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>

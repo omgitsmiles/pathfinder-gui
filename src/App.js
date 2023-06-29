@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import { RingLoader } from 'react-spinners';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -30,6 +29,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
+  const [loading, setLoading] = useState(false)
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -37,7 +37,10 @@ export default function SignInSide() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    setLoading(loading => true)
+    console.log(loading)
   };
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -68,7 +71,6 @@ export default function SignInSide() {
             }}
           >
             <RocketLaunchIcon sx={{ m: 2 }}>
-              {/* <LockOutlinedIcon /> */}
             </RocketLaunchIcon>
             <Typography component="h1" variant="h5">
               Path Finder
@@ -90,8 +92,9 @@ export default function SignInSide() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Download
+                {loading ? "Downloading..." : "Download"}
               </Button>
+              <div sx={{ alignItems: "center"}}>{loading ? <RingLoader color="#2196f3"/> : null}</div>
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
